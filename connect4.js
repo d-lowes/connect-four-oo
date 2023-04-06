@@ -1,3 +1,4 @@
+"use strict";
 
 /** Connect Four
  *
@@ -9,11 +10,13 @@
 
 
 class Game {
-  constructor(height, width) {
+  constructor(height = 6, width = 7) {
     this.width = width;
     this.height = height;
     this.board = []; // array of rows, each row is array of cells  (board[y][x])
     this.currPlayer = 1; // active player: 1 or 2
+    this.makeBoard();
+    this.makeHtmlBoard();
   }
 
   /** makeBoard: create in-JS board structure:
@@ -30,6 +33,8 @@ class Game {
 
   makeHtmlBoard() {
     const board = document.getElementById('board');
+
+    board.innerHTML = '';
 
     // make column tops (clickable area for adding a piece to that column)
     const top = document.createElement('tr');
@@ -91,8 +96,9 @@ class Game {
 
   handleClick(evt) {
     // get x from ID of clicked cell
-    const x = Number(evt.target.id.slice('top-'.length));
-    debugger;
+
+    const x = +evt.target.id;
+
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
     if (y === null) {
@@ -120,7 +126,7 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    function _win(cells) {
+      const _win = (cells) => {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
@@ -154,10 +160,9 @@ class Game {
 
 }
 
-let myGame = new Game(6,7);
+// let myGame = new Game(6,7);
 
-myGame.makeBoard();
-myGame.makeHtmlBoard();
+new Game();
 
 
 
