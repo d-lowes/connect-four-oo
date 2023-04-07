@@ -182,6 +182,7 @@ const startBtn = document.getElementById('start-btn');
 startBtn.addEventListener('click', function () {
   let p1 = new Player(document.getElementById(`color1`).value);
   let p2 = new Player(document.getElementById(`color2`).value);
+
   p1.id = 1;
   p2.id = 2;
 
